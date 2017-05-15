@@ -26,6 +26,20 @@ var albumMarconi = {
     {title: "Wrong phone number", duration: "2:15"}
   ]
 };
+var albumSolfa = {
+  title: "Solfa",
+  artist: "Asian Kungfu Generation",
+  label: "Kioon",
+  year: "2004",
+  albumArtUrl: "assets/images/album_covers/06.png",
+  songs: [
+    {title: "Resonance", duration: "2:27"},
+    {title: "Rewrite", duration: "4:39"},
+    {title: "Loop and Loop", duration: "3:37"},
+    {title: "To Your Town", duration: "3:40"},
+    {title: "My World", duration: "4:03"}
+  ]
+};
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
     '<tr class="album-view-song-item">'
@@ -35,12 +49,12 @@ var createSongRow = function(songNumber, songName, songLength) {
   + '</tr>';
   return template;
 };
+var albumTitle = document.getElementsByClassName("album-view-title")[0];
+var albumArtist = document.getElementsByClassName("album-view-artist")[0];
+var albumReleaseInfo = document.getElementsByClassName("album-view-release-info")[0];
+var albumImage = document.getElementsByClassName("album-cover-art")[0];
+var albumSongList = document.getElementsByClassName("album-view-song-list")[0];
 var setCurrentAlbum = function(album) {
-  var albumTitle = document.getElementsByClassName("album-view-title")[0];
-  var albumArtist = document.getElementsByClassName("album-view-artist")[0];
-  var albumReleaseInfo = document.getElementsByClassName("album-view-release-info")[0];
-  var albumImage = document.getElementsByClassName("album-cover-art")[0];
-  var albumSongList = document.getElementsByClassName("album-view-song-list")[0];
   albumTitle.firstChild.nodeValue = album.title;
   albumArtist.firstChild.nodeValue = album.artist;
   albumReleaseInfo.firstChild.nodeVallue = album.year + " " + album.label;
@@ -48,8 +62,14 @@ var setCurrentAlbum = function(album) {
   albumSongList.innerHTML = "";
   for (var i = 0; i < album.songs.length; i++) {
     albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
-  }
+  };
 };
 window.onload = function() {
-  setCurrentAlbum(albumPicasso);
+  setCurrentAlbum(albumSolfa);
+  var albumList = [albumPicasso, albumMarconi, albumSolfa];
+  var index = 0;
+  albumImage.addEventListener("click", function(event)) {
+    setCurrentAlbum(album[index]);
+    index++;
+  }
 };
