@@ -40,7 +40,7 @@ var createSongRow = function(songNumber, songName, songLength) {
     '<tr class="album-view-song-item">'
   + '<td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
   + '<td class="song-item-title">' + songName + '</td>'
-  + '<td class="song-item-duration">' + songLength + '</td>'
+  + '<td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
   + '</tr>';
   var $row = $(template);
   var clickHandler = function() {
@@ -110,12 +110,27 @@ var setCurrentAlbum = function(album) {
     $albumSongList.append($newRow);
   }
 };
+var setCurrentTimeInPlayerBar = function(currentTime) {
+  $(".current-time").html(filterTimeCode(currentTime));
+};
+var setTotalTimeInPlayerBar = function(totalTime) {
+  $(".total-time").html(filterTimeCode(totalTime));
+};
+var filterTimeCode = function(timeInSeconds) {
+  var time = parseFloat(timeInSeconds);
+  var time60 = time / 60;
+  var timeMinutes = Math.floor(time60);
+  var timeSeconds = (time60 - timeMinutes) * 60;
+  return timeMinutes + ":" + timeSeconds;
+}
 var updateSeekBarWhileSongPlays = function () {
   if (currentSoundFile) {
     currentSoundFile.bind("timeupdate", function(event) {
+      setTotalTimeInPlayerBar();
       var seekBarFillRatio = this.getTime() / this.getDuration();
       var $seekBar = $(".seek-control .seek-bar");
       updateSeekPercentage($seekBar, seekBarFillRatio);
+      setCurrentTimeInPlayerBar();
     });
   }
 };
