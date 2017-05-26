@@ -1,5 +1,5 @@
 .player-bar {
-  postion: fixed;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -50,7 +50,7 @@
   text-align: center;
   font-size: 0.75rem;
   margin: 0;
-  postion: absolute;
+  position: absolute;
   width: 100%;
   font-weight: 300;
 }
@@ -65,7 +65,7 @@
   display: none;
 }
 .seek-control {
-  postion: relative;
+  position: relative;
   font-size: 0.8rem;
 }
 .seek-control .current-time {
@@ -91,7 +91,7 @@
   border-radius: 2px;
 }
 .seek-bar .thumb {
-  postion: absolute;
+  position: absolute;
   height: 0.5rem;
   width: 0.5rem;
   background-color: white;
@@ -103,7 +103,10 @@
   cursor: pointer;
   -webkit-transition: all 100ms ease-in-out;
   -moz-transition: all 100ms ease-in-out;
-  transitoin: all 100ms ease-in-out;
+  transition: width 100ms ease-in-out,
+              height 100ms ease-in-out,
+              margin-top 100ms ease-in-out,
+              margin-left 100ms ease-in-out;
 }
 .seek-bar:hover .thumb {
   width: 1.1rem;
